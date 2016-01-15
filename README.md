@@ -17,7 +17,7 @@ WEBDAV_LOCATIONS = ['127.0.0.1:11211', 'https://dav1.dev.lab.sys.mail.ru/webdav/
 ### способ №1
 
 ```python
-from webdav_storage.backend import WebDAVStorage
+from webdav_storage import WebDAVStorage
 
 webdav_storage = WebDAVStorage()
 
@@ -26,5 +26,5 @@ image = models.ImageField('Изображение', upload_to=image_path, max_le
 
 ### способ №2
 ```python
-DEFAULT_FILE_STORAGE = 'webdav_storage.backend.WebDAVStorage'
+DEFAULT_FILE_STORAGE = 'webdav_storage.WebDAVStorage'
 ```
