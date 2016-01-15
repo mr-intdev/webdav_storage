@@ -21,7 +21,7 @@ from webdav_storage import WebDAVStorage
 
 webdav_storage = WebDAVStorage()
 
-image = models.ImageField('Изображение', upload_to=image_path, max_length=255, storage=webdav_storage)
+image = models.ImageField(u'Изображение', upload_to=image_path, max_length=255, storage=webdav_storage)
 ```
 
 ### способ №2
