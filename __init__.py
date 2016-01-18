@@ -1,1 +1,1 @@
-from storage import backend
+from storage.backend import WebDAVStorage, WebDAVException
