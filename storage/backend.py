@@ -1,5 +1,5 @@
 # coding: utf-8
-
+import hashlib
 import os
 import logging
 import random
@@ -34,6 +34,12 @@ class WebDAVStorage(Storage):
     def __init__(self, locations=settings.WEBDAV_LOCATIONS, timeout=DEFAULT_TIME_OUT):
         self._locations = locations
         self._timeout = int(timeout or DEFAULT_TIME_OUT)
+
+    def save(self, name, content, max_length=None):
+        path, file_name = os.path.split(name)
+        f_name, f_extension = os.path.splitext(file_name)
+        hash_name = os.path.join(path, hashlib.md5(f_name.encode("utf-8")).hexdigest() + f_extension)
+        return super(WebDAVStorage, self).save(hash_name, content, max_length)
 
     def _get_full_path(self, location, name):
         return urljoin(location, str(name))
