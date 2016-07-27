@@ -3,10 +3,16 @@ import hashlib
 import os
 import logging
 import random
-import human_curl as requests
-import pycurl2 as pycurl
-from urlparse import urljoin
-from StringIO import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import BytesIO as StringIO
+try:
+    from urlparse import urljoin
+except ImportError:
+    from urllib.parse import urljoin
+import requests
+import pycurl
 from django.conf import settings
 from django.core.files import File
 from django.core.files.storage import Storage
@@ -67,7 +73,6 @@ class WebDAVStorage(Storage):
         return file_found
 
     def _save(self, name, content):
-
         logger.debug(u'saving {0}'.format(name))
 
         is_tmp_file = hasattr(content.file, 'temporary_file_path')
